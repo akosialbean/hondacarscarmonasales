@@ -5,9 +5,7 @@
 
     const images = ref([
         '/images/crv.png',
-        '/images/brv.png',
-        '/images/city.png',
-        '/images/brio.png',
+        '/images/honda.png',
     ]);
 
     const currentIndex = ref(0);
@@ -63,25 +61,30 @@
     <Head title="Honda Cars Carmona Sales - Home"></Head>
     <TopNavbar />
     <div class="w-full pt-16">
-        <div class="relative w-full">
-        <div v-for="(image, index) in images" :key="index">
-            <img :src="image" alt="Honda Car" class="w-full h-auto object-cover" v-show="currentIndex === index" />
-        </div>
+        <div class="relative w-full" style="padding-bottom: 45%">
+            <img
+                v-for="(image, index) in images"
+                :key="index"
+                :src="image"
+                alt="Honda Car"
+                class="absolute w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                :class="{ 'opacity-100': currentIndex === index, 'opacity-0': currentIndex !== index }"
+            />
 
-        <button @click="prevSlide" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none" aria-label="Previous Slide">
+        <button @click="prevSlide" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none z-10" aria-label="Previous Slide">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
 
-        <button @click="nextSlide" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none" aria-label="Next Slide">
+        <button @click="nextSlide" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none z-10" aria-label="Next Slide">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
         <!-- <img src="/images/crv.png" alt="Honda Cars Carmona" class="w-full h-auto object-cover mt-7" /> -->
 
-        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
             <button v-for="(images, index) in images" :key="index" @click="goToSlide(index)" class="w-3 h-3 bg-white rounded-full focus:outline-none" :class="{ 'bg-red-600': currentIndex === index }"></button>
         </div>
     </div>

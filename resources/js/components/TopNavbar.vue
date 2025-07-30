@@ -12,7 +12,6 @@
         { title: 'Cars', href: '#', icon: 'i-heroicons-home-solid' },
         { title: 'Promos', href: '#', icon: 'i-heroicons-home-solid' },
         { title: 'Reviews', href: '#', icon: 'i-heroicons-home-solid' },
-        { title: 'Tips', href: '#', icon: 'i-heroicons-home-solid' },
     ];
 </script>
 
