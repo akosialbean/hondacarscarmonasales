@@ -69,7 +69,7 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="bg-gray-900 mt-10 px-4 py-4">
+        <div class="bg-gray-900 mt-10 px-4 py-4 bottom-0 text-white text-center">
             test
         </div>
     </div>
