@@ -11,6 +11,14 @@ Route::get('/promos', function () {
     return Inertia::render('Promos');
 })->name('promos');
 
+Route::get('/vehicleapplication', function () {
+    return Inertia::render('VehicleApplication');
+})->name('vehicleapplication');
+
+Route::get('/reviews', function () {
+    return Inertia::render('CustomerReviews');
+})->name('reviews');
+
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

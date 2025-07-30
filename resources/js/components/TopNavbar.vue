@@ -10,7 +10,7 @@
     const navItems = [
         { title: 'Home', href: '/', icon: 'i-heroicons-home-solid' },
         { title: 'Promos', href: '/promos', icon: 'i-heroicons-home-solid' },
-        { title: 'Reviews', href: '#', icon: 'i-heroicons-home-solid' },
+        { title: 'Reviews', href: '/reviews', icon: 'i-heroicons-home-solid' },
     ];
 </script>
 
@@ -44,7 +44,7 @@
                     <a v-for="item in navItems" :key="item.title" :href="item.href" class="text-white hover:text-gray-300 px-3 py-2 rounded-md font-medium">
                         {{ item.title }}
                     </a>
-                    <a href="#" class="bg-red-900 hover:bg-red-600 text-white hover:text-white px-3 py-2 rounded-md font-medium border border-white block">
+                    <a href="/vehicleapplication" class="bg-red-900 hover:bg-red-600 text-white hover:text-white px-3 py-2 rounded-md font-medium border border-white block">
                         <span class="hidden lg:inline">Apply Here</span>
                         <span class="lg:hidden">Apply</span>
                     </a>
