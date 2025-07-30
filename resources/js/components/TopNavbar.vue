@@ -16,14 +16,29 @@
     ];
 </script>
 
+<style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Mogra&display=swap');
+
+    .best-deals {
+        font-family: 'Bangers', cursive;
+    }
+
+    .invert-color {
+        filter: invert(1);
+    }
+</style>
+
 <template>
     <nav class="fixed top-0 w-full bg-red-600 shadow-lg z-10">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <!-- LOGO -->
-                <div class="flex-shrink-0 text-white text-2xl font-bold">
-                    <h1 class="hidden md:block">Honda Cars Carmona Sales</h1>
-                    <h1 class="block md:hidden">HCCS</h1>
+                <!-- LOGO AND BRAND NAME -->
+                <div class="flex items-center">
+                    <img src="/images/logo.png" alt="Honda Logo" class="h-10 w-auto invert-color">
+                    <div class="flex-shrink-0 text-white text-2xl font-bold ml-4">
+                        <h1 class="hidden md:block">Honda Cars Carmona Sales</h1>
+                        <h1 class="block md:hidden">HCCS</h1>
+                    </div>
                 </div>
 
                 <!-- DESKTOP MENU -->

@@ -5,9 +5,9 @@
 
     const images = ref([
         '/images/crv.png',
-        '/images/crv.png',
-        '/images/crv.png',
-        '/images/crv.png',
+        '/images/brv.png',
+        '/images/city.png',
+        '/images/brio.png',
     ]);
 
     const currentIndex = ref(0);
