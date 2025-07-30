@@ -1,6 +1,50 @@
 <script setup lang="ts">
     import { Head } from '@inertiajs/vue3';
     import TopNavbar  from '@/components/TopNavbar.vue';
+    import { ref, onMounted, onUnmounted } from 'vue';
+
+    const images = ref([
+        '/images/crv.png',
+        '/images/crv.png',
+        '/images/crv.png',
+        '/images/crv.png',
+    ]);
+
+    const currentIndex = ref(0);
+    let intervalId: number | null = null;
+    const autoplayDelay = 3000;
+
+    const nextSlide = () => {
+        currentIndex.value = (currentIndex.value + 1 + images.value.length) % images.value.length;
+    };
+
+    const prevSlide = () => {
+        currentIndex.value = (currentIndex.value - 1 + images.value.length) % images.value.length;
+    };
+
+    const goToSlide = (index: number) => {
+        currentIndex.value = index;
+    };
+
+    const startAutoplay = () => {
+        stopAutoplay();
+        intervalId = setInterval(nextSlide, autoplayDelay);
+    };
+
+    const stopAutoplay = () => {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    };
+
+    onMounted(() => {
+        startAutoplay();
+    });
+
+    onUnmounted(() => {
+        stopAutoplay();
+    });
 </script>
 
 <style scoped>
@@ -16,13 +60,31 @@
 </style>
 
 <template>
-    <Head title="Honda Cars Carmona Sales">
-        <!-- <link rel="preconnect" href="https://rsms.me/" />
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" /> -->
-    </Head>
+    <Head title="Honda Cars Carmona Sales - Home"></Head>
     <TopNavbar />
-    <div class="w-full pt-9">
-        <img src="/images/crv.png" alt="Honda Cars Carmona" class="w-full h-auto object-cover mt-7" />
+    <div class="w-full pt-16">
+        <div class="relative w-full">
+        <div v-for="(image, index) in images" :key="index">
+            <img :src="image" alt="Honda Car" class="w-full h-auto object-cover" v-show="currentIndex === index" />
+        </div>
+
+        <button @click="prevSlide" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none" aria-label="Previous Slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+
+        <button @click="nextSlide" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300 focus:outline-none" aria-label="Next Slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+        <!-- <img src="/images/crv.png" alt="Honda Cars Carmona" class="w-full h-auto object-cover mt-7" /> -->
+
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            <button v-for="(images, index) in images" :key="index" @click="goToSlide(index)" class="w-3 h-3 bg-white rounded-full focus:outline-none" :class="{ 'bg-red-600': currentIndex === index }"></button>
+        </div>
+    </div>
         <div>
             <a href="#" class="bg-red-700 text-white mx-auto px-4 py-2 rounded-md hover:bg-red-500 transition-colors duration-300 text-center mt-10 font-semibold block max-w-xs mx-auto">
                 Get a quote now
