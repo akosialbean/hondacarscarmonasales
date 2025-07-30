@@ -40,8 +40,8 @@
                 </div>
 
                 <!-- DESKTOP MENU -->
-                <div class="hidden md:flex space-x-4">
-                    <a v-for="item in navItems" :key="item.title" :href="item.href" class="text-white hover:text-gray-300 px-3 py-2 rounded-md font-medium">
+                <div class="hidden md:flex space-x-1">
+                    <a v-for="item in navItems" :key="item.title" :href="item.href" class="text-white hover:bg-white hover:text-red-600 px-3 py-2 rounded-md font-medium">
                         {{ item.title }}
                     </a>
                     <a href="/vehicleapplication" class="bg-red-900 hover:bg-red-600 text-white hover:text-white px-3 py-2 rounded-md font-medium border border-white block">
@@ -68,7 +68,7 @@
                 <a v-for="item in navItems" :key="item.title" :href="item.href" class="text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium">
                     {{ item.title }}
                 </a>
-                <a href="#" class="bg-red-900 hover:bg-red-600 text-white hover:text-gray-300 px-3 py-2 rounded-md font-medium border border-white block">
+                <a href="/vehicleapplication" class="bg-red-900 hover:bg-red-600 text-white hover:text-gray-300 px-3 py-2 rounded-md font-medium border border-white block">
                     Apply
                 </a>
             </div>
