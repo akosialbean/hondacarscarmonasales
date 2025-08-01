@@ -2,41 +2,62 @@
     import { Head } from '@inertiajs/vue3';
     import TopNavbar from '@/components/TopNavbar.vue';
     import FooterLinks from '@/components/FooterLinks.vue';
+    import Swal from 'sweetalert2';
 
     const borrowerFields = [
-        { name: 'lastName', label: 'Last Name', type: 'text', required: true },
-        { name: 'firstName', label: 'First Name', type: 'text', required: true },
+        { name: 'lastName', label: 'Last Name', type: 'text', required: false },
+        { name: 'firstName', label: 'First Name', type: 'text', required: false },
         { name: 'middleName', label: 'Middle Name', type: 'text', required: false },
-        { name: 'birthDate', label: 'Date of Birth', type: 'date', required: true },
-        { name: 'completeAddress', label: 'Complete Address', type: 'text', required: true },
-        { name: 'contactNumber', label: 'Contact Number', type: 'text', required: true },
-        { name: 'emailAddress', label: 'Email Address', type: 'email', required: true },
-        { name: 'sourceOfIncome', label: 'Source of Income', type: 'text', required: true },
-        { name: 'companyBusinessName', label: 'Company / Business Name', type: 'text', required: true },
-        { name: 'monthlyIncome', label: 'Monthly Income', type: 'text', required: true },
-        { name: 'validID', label: 'Valid ID', type: 'text', required: true },
+        { name: 'birthDate', label: 'Date of Birth', type: 'date', required: false },
+        { name: 'completeAddress', label: 'Complete Address', type: 'text', required: false },
+        { name: 'contactNumber', label: 'Contact Number', type: 'text', required: false },
+        { name: 'emailAddress', label: 'Email Address', type: 'email', required: false },
+        { name: 'sourceOfIncome', label: 'Source of Income', type: 'text', required: false },
+        { name: 'companyBusinessName', label: 'Company / Business Name', type: 'text', required: false },
+        { name: 'monthlyIncome', label: 'Monthly Income', type: 'text', required: false },
+        { name: 'validID', label: 'Valid ID', type: 'text', required: false },
     ];
 
     const coBorrowerFields = [
-        { name: 'coBorrowerLastName', label: 'Last Name', type: 'text', required: true },
-        { name: 'coBorrowerFirstName', label: 'First Name', type: 'text', required: true },
+        { name: 'coBorrowerLastName', label: 'Last Name', type: 'text', required: false },
+        { name: 'coBorrowerFirstName', label: 'First Name', type: 'text', required: false },
         { name: 'coBorrowerMiddleName', label: 'Middle Name', type: 'text', required: false },
-        { name: 'coBorrowerBirthDate', label: 'Date of Birth', type: 'date', required: true },
-        { name: 'coBorrowerAddress', label: 'Address', type: 'text', required: true },
-        { name: 'coBorrowerContactNumber', label: 'Contact Number', type: 'text', required: true },
-        { name: 'coBorrowerEmailAddress', label: 'Email Address', type: 'email', required: true },
-        { name: 'coBorrowerSourceOfIncome', label: 'Source of Income', type: 'text', required: true },
-        { name: 'coBorrowerCompanyBusinessName', label: 'Company / Business Name', type: 'text', required: true },
-        { name: 'coBorrowerMonthlyIncome', label: 'Monthly Income', type: 'text', required: true },
-        { name: 'coBorrowerValidID', label: 'Valid ID', type: 'text', required: true },
+        { name: 'coBorrowerBirthDate', label: 'Date of Birth', type: 'date', required: false },
+        { name: 'coBorrowerAddress', label: 'Address', type: 'text', required: false },
+        { name: 'coBorrowerContactNumber', label: 'Contact Number', type: 'text', required: false },
+        { name: 'coBorrowerEmailAddress', label: 'Email Address', type: 'email', required: false },
+        { name: 'coBorrowerSourceOfIncome', label: 'Source of Income', type: 'text', required: false },
+        { name: 'coBorrowerCompanyBusinessName', label: 'Company / Business Name', type: 'text', required: false },
+        { name: 'coBorrowerMonthlyIncome', label: 'Monthly Income', type: 'text', required: false },
+        { name: 'coBorrowerValidID', label: 'Valid ID', type: 'text', required: false },
     ];
 
     const vehicleDetails = [
-        { name: 'vehicleVodel', label: 'Model', type: 'text', required: true },
-        { name: 'vehicleVariant', label: 'Variant', type: 'text', required: true },
-        { name: 'vehicleColor', label: 'Color', type: 'text', required: true },
-        { name: 'vehiclePrice', label: 'Price', type: 'text', required: true },
+        { name: 'vehicleVodel', label: 'Model', type: 'text', required: false },
+        { name: 'vehicleVariant', label: 'Variant', type: 'text', required: false },
+        { name: 'vehicleColor', label: 'Color', type: 'text', required: false },
+        { name: 'vehiclePrice', label: 'Price', type: 'text', required: false },
     ];
+
+    const handleSubmit = () => {
+        Swal.fire({
+            title: 'Submit Application?',
+            text: "Please review your application before submitting.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Submitted!',
+                    'Your application has been submitted.',
+                    'success'
+                )
+            }
+        })
+    }
     
 </script>
 
@@ -48,7 +69,7 @@
         <p>Fill out the form below to apply for a vehicle.</p>
         <!-- Add application form content here -->
 
-        <form class="bg-white shadow-md rounded-lg p-6">
+        <form @submit.prevent="handleSubmit" class="bg-white shadow-md rounded-lg p-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-gray-100 p-4 rounded-lg shadow-md">
                     <h2 class="text-xl font-semibold mb-2">Borrower's Information</h2>
