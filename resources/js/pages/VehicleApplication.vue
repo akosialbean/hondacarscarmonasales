@@ -3,7 +3,7 @@
     import TopNavbar from '@/components/TopNavbar.vue';
     import FooterLinks from '@/components/FooterLinks.vue';
     import Swal from 'sweetalert2';
-    import { reactive } from 'vue';
+    import { reactive, computed } from 'vue';
     import ModernFileInput from '@/components/ModernFileInput.vue';
 
     const borrowerFields = [
@@ -56,6 +56,16 @@
     const validationState = reactive({
         contactNumber: true,
         coBorrowerContactNumber: true,
+    });
+
+    const contactNumberClass = computed(() => {
+        if (!formData.contactNumber) return '';
+        return validationState.contactNumber ? 'border-green-500' : '!border-red-500';
+    });
+
+    const coBorrowerContactNumberClass = computed(() => {
+        if (!formData.coBorrowerContactNumber) return '';
+        return validationState.coBorrowerContactNumber ? 'border-green-500' : '!border-red-500';
     });
 
     const clearForm = () => {
@@ -144,7 +154,7 @@
                     <h2 class="text-xl font-semibold mb-2">Borrower's Information</h2>
                     <div v-for="field in borrowerFields" :key="field.name" class="mb-4">
                         <label :for="field.name" class="block text-sm font-medium text-gray-700 font-bold">{{ field.label }}:</label>
-                        <input v-if="field.type !== 'select'" v-model="formData[field.name]" :type="field.type" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :class="{ '!border-red-500': field.name === 'contactNumber' && !validationState.contactNumber }" :required="field.required" @input="field.name === 'contactNumber' && formatPhoneNumber('contactNumber')">
+                        <input v-if="field.type !== 'select'" v-model="formData[field.name]" :type="field.type" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :class="field.name === 'contactNumber' ? contactNumberClass : ''" :required="field.required" @input="field.name === 'contactNumber' && formatPhoneNumber('contactNumber')">
                         <select v-else v-model="formData[field.name]" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :required="field.required">
                             <option disabled value="">Please select one</option>
                             <option v-for="(label, value) in field.options" :key="value" :value="value">{{ label }}</option>
@@ -157,7 +167,7 @@
                     <h2 class="text-xl font-semibold mb-2">Co-Borrower's Information</h2>
                     <div v-for="field in coBorrowerFields" :key="field.name" class="mb-4">
                         <label :for="field.name" class="block text-sm font-medium text-gray-700 font-bold">{{ field.label }}:</label>
-                        <input v-if="field.type !== 'select'" v-model="formData[field.name]" :type="field.type" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :class="{ '!border-red-500': field.name === 'coBorrowerContactNumber' && !validationState.coBorrowerContactNumber }" :required="field.required" @input="field.name === 'coBorrowerContactNumber' && formatPhoneNumber('coBorrowerContactNumber')">
+                        <input v-if="field.type !== 'select'" v-model="formData[field.name]" :type="field.type" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :class="field.name === 'coBorrowerContactNumber' ? coBorrowerContactNumberClass : ''" :required="field.required" @input="field.name === 'coBorrowerContactNumber' && formatPhoneNumber('coBorrowerContactNumber')">
                         <select v-else v-model="formData[field.name]" :id="field.name" :name="field.name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" :required="field.required">
                             <option disabled value="">Please select one</option>
                             <option v-for="(label, value) in field.options" :key="value" :value="value">{{ label }}</option>
